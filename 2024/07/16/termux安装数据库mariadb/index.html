@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>termux安装数据库mariadb | 挽歌</title><meta name="author" content="挽歌"><meta name="copyright" content="挽歌"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="安装mariadb，输入指令1pkg install mariadb -y  安装后查看是否存在目录my.cnf.d ,如果没有的话可能会失败，这时候我们就需要为其手动创建一个文件夹。 可以cd一下查看是否存在不存在的话就创建它，没有报错cd的进去的话就是存在该目录，则可以继续下一步 查看命令1cd &#x2F;data&#x2F;data&#x2F;com.termux&#x2F;files&#x2F;usr&#x2F;etc&#x2F;my.cnf.d  如果不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="termux安装数据库mariadb">
+<meta property="og:url" content="https://143wange.top/2024/07/16/termux%E5%AE%89%E8%A3%85%E6%95%B0%E6%8D%AE%E5%BA%93mariadb/index.html">
+<meta property="og:site_name" content="挽歌">
+<meta property="og:description" content="安装mariadb，输入指令1pkg install mariadb -y  安装后查看是否存在目录my.cnf.d ,如果没有的话可能会失败，这时候我们就需要为其手动创建一个文件夹。 可以cd一下查看是否存在不存在的话就创建它，没有报错cd的进去的话就是存在该目录，则可以继续下一步 查看命令1cd &#x2F;data&#x2F;data&#x2F;com.termux&#x2F;files&#x2F;usr&#x2F;etc&#x2F;my.cnf.d  如果不">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://143wange.top/img/fire.jpg">
+<meta property="article:published_time" content="2024-07-16T10:37:29.000Z">
+<meta property="article:modified_time" content="2024-07-19T05:04:37.371Z">
+<meta property="article:author" content="挽歌">
+<meta property="article:tag" content="termux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://143wange.top/img/fire.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://143wange.top/2024/07/16/termux%E5%AE%89%E8%A3%85%E6%95%B0%E6%8D%AE%E5%BA%93mariadb/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'termux安装数据库mariadb',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-19 13:04:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./img/fire.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">挽歌</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">termux安装数据库mariadb</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-16T10:37:29.000Z" title="发表于 2024-07-16 18:37:29">2024-07-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-19T05:04:37.371Z" title="更新于 2024-07-19 13:04:37">2024-07-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="termux安装数据库mariadb"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="安装mariadb，输入指令"><a href="#安装mariadb，输入指令" class="headerlink" title="安装mariadb，输入指令"></a>安装mariadb，输入指令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg install mariadb -y</span><br></pre></td></tr></table></figure>
+
+<p>安装后查看是否存在目录<code>my.cnf.d</code> ,如果没有的话可能会失败，这时候我们就需要为其手动创建一个文件夹。</p>
+<p>可以cd一下查看是否存在不存在的话就创建它，没有报错cd的进去的话就是存在该目录，则可以继续下一步</p>
+<h5 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /data/data/com.termux/files/usr/etc/my.cnf.d</span><br></pre></td></tr></table></figure>
+
+<h5 id="如果不存在，则创建："><a href="#如果不存在，则创建：" class="headerlink" title="如果不存在，则创建："></a>如果不存在，则创建：</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /data/data/com.termux/files/usr/etc/my.cnf.d</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动数据库"><a href="#启动数据库" class="headerlink" title="启动数据库"></a>启动数据库</h4><p>启动前初始化一下数据库，<code>mysql_install_db</code> ，初始化完毕后输入启动命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">~ $ mysqld</span><br><span class="line">mysqld: Deprecated program name. It will be removed in a future release, use &#x27;/data/data/com.termux/files/usr/bin/mariadbd&#x27; instead</span><br><span class="line">2024-07-16 17:43:38 0 [Note] Starting MariaDB 11.1.2-MariaDB source revision 9bc25d98209df6810f7a7d5e7dd3ae677a313ab5 as process 13403</span><br><span class="line">2024-07-16 17:43:38 0 [Note] InnoDB: Compressed tables use zlib 1.3</span><br><span class="line">2024-07-16 17:43:38 0 [Note] InnoDB: Number of transaction pools: 1</span><br><span class="line">2024-07-16 17:43:38 0 [Note] InnoDB: Using generic crc32 instructions</span><br><span class="line">2024-07-16 17:43:38 0 [Note] InnoDB: Initializing buffer pool, total size = 128.000MiB, chunk size = 2.000MiB</span><br><span class="line">2024-07-16 17:43:38 0 [Note] InnoDB: Completed initialization of buffer pool</span><br><span class="line">2024-07-16 17:43:39 0 [Note] InnoDB: Buffered log writes (block size=512 bytes)</span><br><span class="line">2024-07-16 17:43:39 0 [Note] InnoDB: End of log at LSN=47311</span><br><span class="line">2024-07-16 17:43:39 0 [Note] InnoDB: Opened 3 undo tablespaces</span><br><span class="line">2024-07-16 17:43:39 0 [Note] InnoDB: 128 rollback segments in 3 undo tablespaces are active.</span><br><span class="line">2024-07-16 17:43:39 0 [Note] InnoDB: Setting file &#x27;./ibtmp1&#x27; size to 12.000MiB. Physically writing the file full; Please wait ...</span><br><span class="line">2024-07-16 17:43:39 0 [Note] InnoDB: File &#x27;./ibtmp1&#x27; size is now 12.000MiB.</span><br><span class="line">2024-07-16 17:43:39 0 [Note] InnoDB: log sequence number 47311; transaction id 14</span><br><span class="line">2024-07-16 17:43:39 0 [Note] InnoDB: Loading buffer pool(s) from /data/data/com.termux/files/usr/var/lib/mysql/ib_buffer_pool</span><br><span class="line">2024-07-16 17:43:39 0 [Note] Plugin &#x27;FEEDBACK&#x27; is disabled.</span><br><span class="line">2024-07-16 17:43:39 0 [Note] Server socket created on IP: &#x27;::&#x27;.</span><br><span class="line">2024-07-16 17:43:39 0 [Note] Server socket created on IP: &#x27;0.0.0.0&#x27;.</span><br><span class="line">2024-07-16 17:43:39 0 [Note] mysqld: Event Scheduler: Loaded 0 events</span><br><span class="line">2024-07-16 17:43:39 0 [Note] InnoDB: Buffer pool(s) load completed at 240716 17:43:39</span><br><span class="line">2024-07-16 17:43:39 0 [Note] mysqld: ready for connections.</span><br><span class="line">Version: &#x27;11.1.2-MariaDB&#x27;  socket: &#x27;/data/data/com.termux/files/usr/var/run/mysqld.sock&#x27;  port: 3306  MariaDB Server</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问数据库"><a href="#访问数据库" class="headerlink" title="访问数据库"></a>访问数据库</h4><p>数据库访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+
+<p>输入后不用输入密码直接回车就好，默认是没有密码的。</p>
+<p>登陆后的输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">~ $ mysql -uroot -p</span><br><span class="line">mysql: Deprecated program name. It will be removed in a future release, use &#x27;/data/data/com.termux/files/usr/bin/mariadb&#x27; instead</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 3</span><br><span class="line">Server version: 11.1.2-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h4><p>输入命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br><span class="line">Query OK, 0 rows affected (0.050 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="开启远程访问"><a href="#开启远程访问" class="headerlink" title="开启远程访问"></a>开启远程访问</h4><p>方法一：</p>
+<p>允许所有主机连接，在mysql的时候我们通常使用一下命令来开启</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">update user set Host=&#x27;%&#x27; where User=&#x27;root&#x27;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p>无疑例外的会出现错误</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1356 - View &#x27;mysql.user&#x27; references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them</span><br></pre></td></tr></table></figure>
+
+<p>这是因为现在的是<code>mariadb</code>了，这个就不适用了，因为<code>mariadb</code>中没有了user表，而是移动到了视图中，且这个命令是用来表的自然不适用于修改视图。mysql.user从10.4版本开始提供了一个新表mysql.global_priv来替代mysql.user. 则修改命令为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mysql.global_priv SET Host=&#x27;%&#x27; WHERE User=&#x27;root&#x27;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：<br>授权方式，授权所有主机连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;123456&#x27; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+<p>或者授权制定主机访问（<strong>推荐</strong>）,例如指定授权给<code>192.168.1.3</code>主机使用root用户登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;192.168.1.3&#x27; IDENTIFIED BY &#x27;12346&#x27; WITH GRANT OPTION; </span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>GRANT ALL PRIVILEGES</code>: 表示授予所有权限。</li>
+<li><code>ON *.*</code>: 表示权限适用于所有数据库（<code>*.*</code> 表示所有数据库和所有表）。</li>
+<li><code>TO &#39;root&#39;@&#39;%&#39;</code>: 表示授予权限给用户名为 <code>root</code>，并且可以从任何主机（<code>&#39;%&#39;</code> 表示通配符，代表任何主机）连接。</li>
+<li><code>IDENTIFIED BY &#39;123456&#39;</code>: 表示使用密码 <code>123456</code> 进行身份验证。</li>
+<li><code>WITH GRANT OPTION</code>: 表示允许用户将自己拥有的权限授予其他用户</li>
+</ul>
+<h4 id="修改配置（可选）"><a href="#修改配置（可选）" class="headerlink" title="修改配置（可选）"></a>修改配置（可选）</h4><p>先对配置文件进行备份</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /data/data/com.termux/files/usr/etc/my.cnf /data/data/com.termux/files/usr/etc/my.cnf.back</span><br></pre></td></tr></table></figure>
+
+<p>备份后再输入以下命令来进行修改配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /data/data/com.termux/files/usr/etc/my.cnf</span><br></pre></td></tr></table></figure>
+
+<p>以下是我配置的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"></span><br><span class="line"># 监听的ip地址，127.0.0.1，仅限本机访问，0.0.0.0 全地址可以访问（任何主机）</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line">skip_host_cache</span><br><span class="line">skip-name-resolve=1</span><br><span class="line">#设置端口号</span><br><span class="line">port=3306</span><br><span class="line"></span><br><span class="line">#设置mysql运行用户</span><br><span class="line">user=root</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=10000</span><br><span class="line"></span><br><span class="line"># 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统</span><br><span class="line">max_connect_errors=10</span><br><span class="line"></span><br><span class="line"># 服务器使用的默认字符集</span><br><span class="line">character_set_server=utf8mb4</span><br><span class="line"></span><br><span class="line"># 建议禁用符号链接，以防止各种安全风险</span><br><span class="line">symbolic-links=0</span><br><span class="line"></span><br><span class="line"># 设置时区</span><br><span class="line">default-time_zone=&#x27;+8:00&#x27;</span><br><span class="line"></span><br><span class="line"># 不使用SSL</span><br><span class="line">skip_ssl</span><br><span class="line"></span><br><span class="line">#TIMESTAMP类型和其他的类型有点不一样，不添加该项配置，否则启动时，会报警</span><br><span class="line">explicit_defaults_for_timestamp=true</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set=utf8mb4</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用进程守护运行"><a href="#使用进程守护运行" class="headerlink" title="使用进程守护运行"></a>使用进程守护运行</h4><p>开启进程守护命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup mysqld &amp;</span><br></pre></td></tr></table></figure>
+
+<p>当前目录会生成一个文件<code>nohup.out</code> 用来存储日志。可以用来<code>tail -f nohup.out</code>查看日志。</p>
+<h4 id="结束运行"><a href="#结束运行" class="headerlink" title="结束运行"></a>结束运行</h4><p>查看运行的pid</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef |grep mysql</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u0_a181  11106  7164  1  1970 pts/3    00:00:00 grep mysql</span><br><span class="line">u0_a181  13403     1  0  1970 ?        00:00:01 mysqld</span><br></pre></td></tr></table></figure>
+
+<p>杀掉进程<code>13403</code>，就算是结束掉进程了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 13403</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://143wange.top">挽歌</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://143wange.top/2024/07/16/termux%E5%AE%89%E8%A3%85%E6%95%B0%E6%8D%AE%E5%BA%93mariadb/">https://143wange.top/2024/07/16/termux%E5%AE%89%E8%A3%85%E6%95%B0%E6%8D%AE%E5%BA%93mariadb/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://143wange.top" target="_blank">挽歌</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/termux/">termux</a></div><div class="post_share"><div class="social-share" data-image="/./img/fire.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/07/16/Win%E6%A1%8C%E9%9D%A2%E5%9B%BE%E6%A0%87%E7%99%BD%E8%89%B2%E6%81%A2%E5%A4%8D/"><img class="next-cover" src="/./img/mao.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Win桌面图标白色恢复</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/07/15/termux%E8%BF%90%E8%A1%8Cgogs/" title="termux运行gogs"><img class="cover" src="/./img/jijiashaonv.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-15</div><div class="title">termux运行gogs</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">挽歌</div><div class="author-info__description">挽歌滴博客，欢迎访问哇！希望在这个你可以学到有用的东西</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wgdragon"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/dirge143" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2692174150@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85mariadb%EF%BC%8C%E8%BE%93%E5%85%A5%E6%8C%87%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">安装mariadb，输入指令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">查看命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%8C%E5%88%99%E5%88%9B%E5%BB%BA%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">如果不存在，则创建：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">启动数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">3.</span> <span class="toc-text">访问数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text">设置密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE"><span class="toc-number">5.</span> <span class="toc-text">开启远程访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">修改配置（可选）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%9B%E7%A8%8B%E5%AE%88%E6%8A%A4%E8%BF%90%E8%A1%8C"><span class="toc-number">7.</span> <span class="toc-text">使用进程守护运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F%E8%BF%90%E8%A1%8C"><span class="toc-number">8.</span> <span class="toc-text">结束运行</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/16/termux%E5%AE%89%E8%A3%85%E6%95%B0%E6%8D%AE%E5%BA%93mariadb/" title="termux安装数据库mariadb"><img src="/./img/fire.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="termux安装数据库mariadb"/></a><div class="content"><a class="title" href="/2024/07/16/termux%E5%AE%89%E8%A3%85%E6%95%B0%E6%8D%AE%E5%BA%93mariadb/" title="termux安装数据库mariadb">termux安装数据库mariadb</a><time datetime="2024-07-16T10:37:29.000Z" title="发表于 2024-07-16 18:37:29">2024-07-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/16/Win%E6%A1%8C%E9%9D%A2%E5%9B%BE%E6%A0%87%E7%99%BD%E8%89%B2%E6%81%A2%E5%A4%8D/" title="Win桌面图标白色恢复"><img src="/./img/mao.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Win桌面图标白色恢复"/></a><div class="content"><a class="title" href="/2024/07/16/Win%E6%A1%8C%E9%9D%A2%E5%9B%BE%E6%A0%87%E7%99%BD%E8%89%B2%E6%81%A2%E5%A4%8D/" title="Win桌面图标白色恢复">Win桌面图标白色恢复</a><time datetime="2024-07-16T03:08:02.000Z" title="发表于 2024-07-16 11:08:02">2024-07-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/15/termux%E8%BF%90%E8%A1%8Cgogs/" title="termux运行gogs"><img src="/./img/jijiashaonv.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="termux运行gogs"/></a><div class="content"><a class="title" href="/2024/07/15/termux%E8%BF%90%E8%A1%8Cgogs/" title="termux运行gogs">termux运行gogs</a><time datetime="2024-07-15T12:44:00.000Z" title="发表于 2024-07-15 20:44:00">2024-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/15/Maven%E5%88%9B%E5%BB%BASpringBoot/" title="Maven创建SpringBoot"><img src="/./img/cat.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Maven创建SpringBoot"/></a><div class="content"><a class="title" href="/2024/07/15/Maven%E5%88%9B%E5%BB%BASpringBoot/" title="Maven创建SpringBoot">Maven创建SpringBoot</a><time datetime="2024-07-15T08:02:01.000Z" title="发表于 2024-07-15 16:02:01">2024-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/13/IDEA2024-1%E5%AE%89%E8%A3%85%E5%B9%B6%E7%A0%B4%E8%A7%A3/" title="IDEA2024.1安装并破解"><img src="/./img/IDEA/Snipaste_2024-06-13_19-17-20.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IDEA2024.1安装并破解"/></a><div class="content"><a class="title" href="/2024/06/13/IDEA2024-1%E5%AE%89%E8%A3%85%E5%B9%B6%E7%A0%B4%E8%A7%A3/" title="IDEA2024.1安装并破解">IDEA2024.1安装并破解</a><time datetime="2024-06-13T10:25:26.000Z" title="发表于 2024-06-13 18:25:26">2024-06-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 挽歌</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><img src="https://haiyong.site/img/icp.png"><a href="https://beian.miit.gov.cn/#/Integrated/index"  style="color:white" target="_blank">桂ICP备2023009870号</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://beian.mps.gov.cn/#/query/webSearch?code=45050002000132"  style="color:white" target="_blank">桂公网安备45050002000132号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
